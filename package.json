@@ -1,0 +1,22 @@
+{
+  "name": "WebPE",
+  "version": "1.0.0",
+  "description": "a web app for editing photos and post it into social media",
+  "main": "index.js",
+  "scripts": {
+    "test": "-"
+  },
+  "repository": {
+    "type": "git",
+    "url": "-"
+  },
+  "keywords": [
+    "-"
+  ],
+  "author": "Macho",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "nunjucks": "^2.4.2"
+  }
+}
