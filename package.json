@@ -1,7 +1,7 @@
 {
   "name": "WebPE",
   "version": "1.0.0",
-  "description": "a web app for editing photos and post it into social media",
+  "description": "a web app for editing photos",
   "main": "index.js",
   "scripts": {
     "test": "-"
