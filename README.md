@@ -1,10 +1,12 @@
 # WebPE
-a Web app for editing photos and post it to social media
+a Web app for editing photos 
 
-# Requirements
-+install nodejs
-+install express with terminal
-	- npm install --save express
-+install nunjucks with terminal 
-	- npm install --save nunjucks 
+## Requirements
+1. Install [Node.js](http://nodejs.org)
+2. Install [Knex.js](http://knexjs.org) (this project is using mysql as the database.)
+3. Install the dependencies ```bash $ npm install```
+
+## Running the server
+```bash $ npm start``` OR ```bash $ npm run dev``` 
+
  
