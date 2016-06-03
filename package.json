@@ -4,7 +4,7 @@
   "description": "a web app for editing photos",
   "main": "index.js",
   "scripts": {
-    "test": "-"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
-    "nunjucks": "^2.4.2"
+    "nunjucks": "^2.4.2",
+    "morgan": "~1.6.1"
   }
 }
