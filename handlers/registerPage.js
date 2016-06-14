@@ -38,9 +38,23 @@ var saveUSER = function(req,res,next){
     
 }
 
+
+var checkUSER = function(req,res,next){
+    USER.findUSER(req.body.nama).then(function(usernama){
+        if(!usernama[0]){
+            next();    
+        }
+        else{
+            res.render('register.html',{message: 'Username telah terpakai !'});
+        }
+        
+    })
+}
+
 registerPage = {
     page : page,
-    saveUser : saveUSER
+    saveUser : saveUSER,
+    checkUSER : checkUSER
 }
 
 module.exports = registerPage;
