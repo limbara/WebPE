@@ -1,6 +1,6 @@
 var table = function(table){
 	table.increments('id_admin').primary();
-	table.string('nama',30).notNullable();
+	table.string('username',30).notNullable();
 	table.string('password',40).notNullable();
 };
 
