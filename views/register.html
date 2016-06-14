@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block navbar %}
+	{% include "non_navbar.html" %}
+{% endblock %}
+
+{% block content %}
+
+<br><br>
+	<div class="container">
+		<div class="row">
+			{% set count = message | wordcount %}
+			{% if count > 0 %}
+			<div class="col s12 card-panel red darken-2">
+				<p class="grey-text text-lighten-4 center">{{message}}</p>
+        	</div>
+			{% endif %}
+			<form class="col s12" method="post" action="/createUser"  enctype="application/x-www-form-urlencoded">
+				<div class="col s8 offset-s2">
+					<div class="input-field col s12">
+					  <input id="nama" name="nama" type="text" class="validate" maxlength="30" onkeypress="lettersOnly(event)" required >
+					  <label for="nama">Nama</label>
+					</div>
+				</div>
+				<div class="col s8 offset-s2">
+					<div class="input-field col s12">
+					  <input name="email" type="email" class="validate" maxlength="50" required>
+					  <label for="email">Email</label>
+					</div>
+				</div>
+				<div class="col s8 offset-s2">
+					<div class="input-field col s12">
+					  <input name="password" type="password" class="validate" maxlength="40" required>
+					  <label for="password">Password</label>
+					</div>
+				</div>
+				<div class="col s8 offset-s2">				
+				  <button class="btn waves-effect waves-light col s6" type="submit" name="action">Submit
+				    <i class="material-icons right">send</i>
+				  </button>
+				  <button class="red btn waves-effect waves-light col s6" type="reset" name="action">Reset
+				    <i class="material-icons right">clear</i>
+				  </button>
+				</div>
+			</form>
+		</div>
+	</div>
+<br><br>
+{% endblock %}
+
+{% block footer %}
+	{% include "footer.html" %}
+{% endblock %}
+
+{% block Scripts %}
+	<!--  Scripts-->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/materialize.js"></script>
+	<script src="/js/init.js"></script>
+	
+{% endblock %}
