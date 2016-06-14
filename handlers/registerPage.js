@@ -2,6 +2,7 @@ var registerPage,
     USER = require('../utils/USER'),
     COLLECTION = require('../utils/COLLECTION');
 var path = require('path');
+var fs = require('fs');
 
 var page = function(req,res){
     res.render('register.html');

@@ -8,6 +8,12 @@ var saveUSER = function(User){
 	});
 };
 
+var findUSER = function(username){
+	return knex('user').select('id_user','username','password','email').where('username',username);
+};
+
+
 module.exports = {
-	saveUSER: saveUSER
+	saveUSER: saveUSER,
+    findUSER:findUSER
 };
