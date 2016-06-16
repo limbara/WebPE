@@ -11,6 +11,7 @@ userrouter = function(app){
 	user.get('/register',registerPage.page);
 	
 	//POST
+	user.post('/login',frontPage.login);
 	user.post('/createUser',registerPage.checkUSER,registerPage.saveUser);
     app.use(user);
 }
