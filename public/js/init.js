@@ -9,4 +9,5 @@ $(document).ready(function(){
    belowOrigin: true 
   });
   $('.parallax').parallax();
+  $('.modal-trigger').leanModal();
 });
