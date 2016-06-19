@@ -8,6 +8,12 @@ var saveCOLLECTION = function(Collection){
 		});
 };
 
+var fetchCOLLECTION = function(id_user){
+	return knex('collection').select('photos', 'path').where('id_user', id_user);
+}
+
+
 module.exports = {
-	saveCOLLECTION: saveCOLLECTION
+	saveCOLLECTION: saveCOLLECTION,
+	fetchCOLLECTION : fetchCOLLECTION
 };
