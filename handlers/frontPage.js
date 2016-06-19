@@ -25,14 +25,8 @@ login = function(req,res){
                 // if user is found and password is right
                 // create a token
                 var token = Auth.generateToken(user)
-                // return the information including token as JSON
-                // res.json({
-                //     success: true,
-                //     message: 'Enjoy your token!',
-                //     token: token
-                // });
                 res.cookie('auth',token);
-                res.json(user.username);
+                res.redirect('/Collection/'+user.username);
             } 
         }  
     });
