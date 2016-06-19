@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Collection{% endblock %}
+
+{% block navbar %}{% include "navbar.html" %}{% endblock %}
+
+
+{% block content %}
+        <div class="row">
+                {% set index = 0 %}
+            {% for arra in collection %}
+                {% set index = index + 1 %}
+            <div class="col s12 m6 l4">
+                    <div class="card small">
+                        <div class="card-image">
+                            <img class="materialboxed responsive-img" src="/images/{{user.username}}/{{arra.filename}}">
+                        </div>
+                        <div class="card-action">
+                                <a class="waves-effect waves-teal btn-flat" href="/Collection/{{user.username}}/edit/{{arra.filename}}"> Edit </a>
+                                <a class="waves-effect waves-yellow btn-flat" href="/Collection/{{user.username}}/{{arra.filename}}/download"> Download </a>
+                                <a class="waves-effect waves-red btn-flat modal-trigger" href="#id{{index}}"> Delete</a>
+                        </div>
+                    </div>
+            </div>
+                <div id="id{{index}}" class="modal bottom-sheet">
+                        <div class="modal-content">
+                                <h4>Delete Photo</h4>
+                                <p><a href="/Collection/{{user.username}}/delete/{{arra.filename}}" class=" modal-action waves-effect waves-light red btn-flat">Yes</a> <a href="#!" class=" modal-action modal-close waves-effect waves-light teal btn-flat">No</a></p>
+                        </div>
+                </div>
+            {% endfor %}
+      </div>
+        <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating red tooltipped hide-on-med-and-down" data-position="bottom" data-delay="50" data-tooltip="Camera" href="/Collection/{{user.username}}/camera"><i class="material-icons">surround_sound</i></a></li>
+                <li><a class="btn-floating blue tooltipped modal-trigger" data-position="bottom" data-delay="50" data-tooltip="Upload" data-target="modal1"><i class="material-icons">publish</i></a></li>
+            </ul>
+        </div>
+        <div id="modal1" class="modal bottom-sheet">
+                <div class="modal-content">
+                        <h4>Upload Photo</h4>
+                                <form class="col s12" method="post" action="/Collection/upload" enctype="multipart/form-data">
+                                        <div class="row">
+                                                <div class="input-field col s12">
+                                	               <input name="file" type="file" id="file" />
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                                <button class="btn waves-effect waves-light col s12" type="submit" >Upload
+                                	               <i class="material-icons right">send</i>
+                                                </button>
+                                        </div>
+                                </form>
+                </div>
+                <div class="modal-footer">
+                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+        </div>
+{% endblock %}
+
+{% block footer %}
+	{% include "footer.html" %}
+{% endblock %}
+
+{% block Scripts %}
+	<!--  Scripts-->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/materialize.js"></script>
+	<script src="/js/init.js"></script>
+{% endblock %}
