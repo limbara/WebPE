@@ -66,10 +66,18 @@ var uploadphoto = function(req,res){
     
 }
 
+var downloadphoto = function(req,res){
+    var username = req.params.username;
+	var filename = req.params.filename;
+	var file = path.join(__dirname,'..','public','images',username,filename);
+	res.download(file);
+}
+
 
 collectionPage = {
     page : page,
-    uploadphoto : uploadphoto
+    uploadphoto : uploadphoto,
+    downloadphoto : downloadphoto
 }
 
 module.exports = collectionPage;

@@ -13,6 +13,8 @@ userrouter = function(app){
     user.get('/',frontPage.page);
 	user.get('/register',registerPage.page);
 	user.get('/Collection/:username',Auth.validate,collectionPage.page);
+	user.get("/Collection/:username/:filename/download",collectionPage.downloadphoto);
+	
 	
 	//POST
 	user.post('/login',frontPage.login);
