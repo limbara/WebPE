@@ -73,11 +73,31 @@ var downloadphoto = function(req,res){
 	res.download(file);
 }
 
+var deletephoto = function(req,res){
+    var user = req.decoded;
+    var photo = req.params.filename;
+    Collection.fetchCOLLECTION(user.id_user).then(function(collection){
+        var col= JSON.parse(collection[0].photos);
+        for(var i=0;i< col.length ; i++){
+            if(col[i].filename === photo){
+                col.splice(i,1);
+                //delete the photo file.
+                fs.unlink(path.join(__dirname, '../public/images/'+user.username+'/'+photo))
+                break;
+            }
+        }
+        Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
+            res.render('info.html',{info: photo + ' telah terhapus',back:'/Collection/'+user.username}); 
+        })
+    })
+    
+}
 
 collectionPage = {
     page : page,
     uploadphoto : uploadphoto,
-    downloadphoto : downloadphoto
+    downloadphoto : downloadphoto,
+    deletephoto : deletephoto
 }
 
 module.exports = collectionPage;

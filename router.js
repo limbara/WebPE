@@ -14,6 +14,7 @@ userrouter = function(app){
 	user.get('/register',registerPage.page);
 	user.get('/Collection/:username',Auth.validate,collectionPage.page);
 	user.get("/Collection/:username/:filename/download",collectionPage.downloadphoto);
+	user.get('/Collection/:username/delete/:filename',Auth.validate,collectionPage.deletephoto);
 	
 	
 	//POST
