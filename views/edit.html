@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Edit{% endblock %}
+
+{% block navbar %}{% include "navbar.html" %}{% endblock %}
+
+
+{% block content %}
+	<br><br>
+	<div class="container">
+		<div class="row">
+			<div id ="photo" class="col s12">
+				
+				<img src="/images/{{user.username}}/{{filename}}" id="img_address" class = "responsive-img"  alt="image_address">
+			 	<canvas id="canvas" class="hide" style="border:1px solid #d3d3d3;" data-caman-hidpi-disabled></canvas>
+			</div>
+			<div class="col s12">
+				<ul class="collapsible" data-collapsible="accordion">
+					<li>
+						<div class="collapsible-header  blue">
+							 <i class="mdi-editor-format-paint right"></i>Effects
+						</div>
+						<div class="collapsible-body">
+							<div class="col s12 white" >
+								<div class="col s6">
+									<div class="range-field">
+										<label for="brightness">Brightness</label>
+										<input id="brightness" type="range" min="-100" max="100" >
+									</div>
+									<div class="range-field">
+										<label for="vibrance">Vibrance</label>
+										<input id="vibrance" type="range" min="-100" max="100">
+									</div>
+									<div class="range-field">
+										<label for="hue">Hue</label>
+										<input id="hue" type="range" min="-100" max="100">
+									</div>
+									<div class="range-field">
+										<label for="clip">Clip</label>
+										<input id="clip" type="range" min="0" max="100">
+									</div>
+									<div class="range-field">
+										<label for="Stactblur">StactBlur</label>
+										<input id="stactblur" type="range" min="0" max="100">
+									</div>
+									<div class="range-field">
+										<label for="contrast">Contrast</label>
+										<input id="contrast" type="range" min="-100" max="100">	
+									</div>
+								</div>
+								<div class="col s6">
+									<div class="range-field">
+										<label for="saturation">Saturation</label>
+										<input id="saturation" type="range" min="-100" max="100">
+									</div>
+									<div class="range-field">
+										<label for="exposure">Exposure</label>
+										<input id="exposure" type="range" min="-100" max="100">
+									</div>
+									<div class="range-field">
+										<label for="sepia">Sepia</label>
+										<input id="sepia" type="range" min="0" max="100">
+									</div>
+									<div class="range-field">
+										<label for="noise">Noise</label>
+										<input id="noise" type="range" min="0" max="100">
+									</div>
+									<div class="range-field">
+										<label for="sharpen">Sharpen</label>
+										<input id="sharpen" type="range" min="0" max="100">
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+        	</div>
+		</div>
+		<div class="row">
+			<form class="col s12" method="post" action="/Collection/{{user.username}}/edit/{{filename}}/save" >
+ 			  	<input name="base" type="text" id="base" class="hide" />
+                <button class="btn waves-effect waves-light col s12" type="submit" > Save </button>
+            </form>
+			
+		</div>
+	</div>
+<br><br>
+
+{% endblock %}
+
+{% block footer %}
+	{% include "footer.html" %}
+{% endblock %}
+
+{% block Scripts %}
+	<!--  Scripts-->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/materialize.js"></script>
+	<script src="/js/init.js"></script>
+	<script src="/js/caman.full.min.js"></script>
+	<script src="/js/edit.js"></script>
+	
+{% endblock %}
