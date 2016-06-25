@@ -19,23 +19,16 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error.html', {
-      message: err.message,
-      status:err.status,
-      error: err
-    });
+    res.redirect('/error?message='+err.message+'&status='+err.status+'&error='+err);
   });
+  
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error.html', {
-    message: err.message,
-    status:err.status,
-    error: {}
-  });
+  res.redirect('/error?message='+err.message+'&status='+err.status+'&error='+err);
 });
 
 

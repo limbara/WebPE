@@ -1,7 +1,7 @@
 var collectionPage,
     page,
     Collection = require('../utils/COLLECTION');
-
+    
 var fs = require('fs');
 var path = require('path');
 var uid = require('uid2');
@@ -9,11 +9,29 @@ var formidable = require('formidable');
 
 page = function(req,res){
     var user = req.decoded;
-    console.log(user);
+    var info = req.query.info;
     Collection.fetchCOLLECTION(user.id_user).then(function(Collection){
-        console.log(Collection);
-        res.render('collection.html',{user : user , collection : JSON.parse(Collection[0].photos) , path: Collection[0].path});
+        res.render('collection.html',{user : user , collection : JSON.parse(Collection[0].photos) , path: Collection[0].path , info : info});
     })
+}
+
+var deletephoto = function(req,res){
+    var user = req.decoded;
+    var photo = req.params.filename;
+    Collection.fetchCOLLECTION(user.id_user).then(function(collection){
+        var col= JSON.parse(collection[0].photos);
+        for(var i=0;i< col.length ; i++){
+            if(col[i].filename === photo){
+                col.splice(i,1);
+                fs.unlink(path.join(__dirname, '../public/images/'+user.username+'/'+photo))
+                break;
+            }
+        }
+        Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
+            res.redirect('/info?i='+photo+' telah terhapus&b=/Collection/'+user.username);''
+        })
+    })
+    
 }
 
 var uploadphoto = function(req,res){
@@ -30,40 +48,31 @@ var uploadphoto = function(req,res){
             file_name = uid(22);
           
             var targetPath = path.join(__dirname, '../public/images/'+user.username+'/'+file_name+'.'+file_ext);
-              console.log(file_name);
-            console.log(file_size);
-            console.log(old_path);
-            console.log(file_ext);
-            console.log(targetPath);
-        
-        fs.readFile(old_path, function(err, data) {
-            fs.writeFile(targetPath, data, function(err) {
-                fs.unlink(old_path, function(err) {
-                    if (err) {
-                        res.status(500);
-                        res.json({'success': false});
-                    } else {
-                        
-                        Collection.fetchCOLLECTION(user.id_user).then(function(collection){
-                            var col= JSON.parse(collection[0].photos);
-                            var uploaded_photo = {
-                                filename : file_name+"."+file_ext
-                            }
-                            col.push(uploaded_photo);
-                            Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
-                                res.render('info.html',{info: 'Upload berhasil',back:'/Collection/'+user.username}); 
+            
+            fs.readFile(old_path, function(err, data) {
+                fs.writeFile(targetPath, data, function(err) {
+                    fs.unlink(old_path, function(err) {
+                        if (err) {
+                            res.redirect('/error?message=something went wrong&status='+500+'&error='+err);
+                        } else {
+                            
+                            Collection.fetchCOLLECTION(user.id_user).then(function(collection){
+                                var col= JSON.parse(collection[0].photos);
+                                var uploaded_photo = {
+                                    filename : file_name+"."+file_ext
+                                }
+                                col.push(uploaded_photo);
+                                Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
+                                    res.redirect('/info?i=Upload berhasil&b=/Collection/'+user.username);
+                                })
                             })
-                        })
-                        
-
-                    }
+                            
+        
+                        }
+                    });
                 });
-            });
-        });
-        
-        
+            }); 
     });
-    
 }
 
 var downloadphoto = function(req,res){
@@ -73,31 +82,20 @@ var downloadphoto = function(req,res){
 	res.download(file);
 }
 
-var deletephoto = function(req,res){
-    var user = req.decoded;
-    var photo = req.params.filename;
-    Collection.fetchCOLLECTION(user.id_user).then(function(collection){
-        var col= JSON.parse(collection[0].photos);
-        for(var i=0;i< col.length ; i++){
-            if(col[i].filename === photo){
-                col.splice(i,1);
-                //delete the photo file.
-                fs.unlink(path.join(__dirname, '../public/images/'+user.username+'/'+photo))
-                break;
-            }
-        }
-        Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
-            res.render('info.html',{info: photo + ' telah terhapus',back:'/Collection/'+user.username}); 
-        })
-    })
-    
-}
-
 collectionPage = {
     page : page,
+    deletephoto : deletephoto,
     uploadphoto : uploadphoto,
-    downloadphoto : downloadphoto,
-    deletephoto : deletephoto
+    downloadphoto : downloadphoto
 }
 
 module.exports = collectionPage;
+
+var match_type = function(array,file_ext){
+    for(var i =0 ;i < array.length ; i++){
+        if(array[i] == file_ext){
+            return true;
+        }
+    }
+    return false;
+} 

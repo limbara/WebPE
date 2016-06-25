@@ -1,7 +1,7 @@
 var jwt    = require('jsonwebtoken');
 
 function generateToken(user){
-	var token = jwt.sign(user, 'SECRET', {
+	var token = jwt.sign(user, 'SECRET' , {
           expiresIn: '1440m' // expires in 24 hours
         });
 	return token;
@@ -12,11 +12,15 @@ function validate(req, res, next){
 	// decode token
 	if (token) {
 		// verifies secret and checks exp
-		jwt.verify(token, 'SECRET', function(err, decoded) {      
+		jwt.verify(token,'SECRET' , function(err, decoded) {      
 		  	if (err) {
-		    	return res.render("error.html",{ success: false, message: 'Failed to authenticate token.' });    
+				return res.redirect('/error?message=Failed to authenticate token&status=500&error='+err); 
 		  	} 
 			else {
+			//check if the token is the one who logged in
+			if(decoded.username != req.params.username){
+				return res.redirect('/error?message=Not Found&status=404'); 
+			}
 		    // if everything is good, save to request for use in other routes
 				var user ={
 					id_user : decoded.id_user,
@@ -31,11 +35,7 @@ function validate(req, res, next){
 	else {
 		// if there is no token
 		// return an error
-		return res.render("error.html",{ 
-		    success: false, 
-		    message: 'No token provided.' ,
-			status : 403
-		});
+		return res.redirect('/error?message=No token provided.&status=403'); 
 	}
 };
 

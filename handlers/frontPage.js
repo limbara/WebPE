@@ -6,7 +6,8 @@ var frontPage,
     
     
 page = function(req,res){
-    res.render('home.html');
+    var info = req.query.info;
+    res.render('home.html',{info : info});
 }
 
 login = function(req,res){
@@ -14,12 +15,12 @@ login = function(req,res){
     USER.findUSER(username).then(function(User){
         var user = User[0];
         if (!user) {
-            res.render("error.html",{ success: false, message: 'Authentication failed. User not found.' });
+            res.redirect("/?info=Authentication failed. User not found.");
         } 
         else if (user) {
             // check if password matches
             if (user.password != req.body.password) {
-                res.render("error.html",{ success: false, message: 'Authentication failed. Wrong password.' });
+                res.redirect("/?info=Authentication failed. Wrong password.");
             }
             else {
                 // if user is found and password is right

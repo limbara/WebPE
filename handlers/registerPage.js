@@ -5,7 +5,8 @@ var path = require('path');
 var fs = require('fs');
 
 var page = function(req,res){
-    res.render('register.html');
+    var info = req.query.info;
+    res.render('register.html',{info : info});
 }
 
 var saveUSER = function(req,res,next){
@@ -31,8 +32,8 @@ var saveUSER = function(req,res,next){
                 if (!fs.existsSync(dir)){
                      fs.mkdirSync(dir);
                 }
-                res.render('info.html',{info: User.username + ' telah terdaftar',back:'/'}); 
-            })
+               res.redirect('/info?i='+User.username+' telah terdaftar&b=/')
+           })
         })
         
     });
@@ -46,7 +47,7 @@ var checkUSER = function(req,res,next){
             next();    
         }
         else{
-            res.render('register.html',{message: 'Username telah terpakai !'});
+            res.redirect('/register?info=Username telah terpakai !');
         }
         
     })
