@@ -8,89 +8,101 @@
 
 {% block content %}
 
-	<div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-        <h1 class="header right teal-text text-accent-1">WebPE</h1>
-			<div class="row hide-on-med-and-down">
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header right teal-text text-lighten-3">WebPE</h1>
+      <div class="row hide-on-med-and-down">
+        {% set count = info | wordcount %}
+        {% if count > 0 %}
         <div class="row">
-				<div class="col s4  offset-s8">
+          <div class="col s4 offset-s8 card-panel red lighten-2">
+            <p class="grey-text text-lighten-4 center-align col s12">{{info}}</p>
+          </div>
+        </div>
+        {% endif %}
+        <div class="row">
+          <div class="col s4  offset-s8">
             <form class="col s12" method="post" action="/login">
-						<div class="row">
-							<div class="input-field col s12">
-								<input name="username" type="text" class="validate" required >
-								<label for="username"><span class="teal-text text-accent-1">Username</span></label>
-							</div>
               <div class="input-field col s12">
-								<input name="password" type="password" class="validate" required >
-								<label for="password"><span class="teal-text text-accent-1">Password</span></label>
-							</div>
+                <input name="username" type="text" class="validate" required >
+                <label for="username"><span class="teal-text text-lighten-3">Username</span></label>
+              </div>
+              <div class="input-field col s12">
+               <input name="password" type="password" class="validate" required >
+                <label for="password"><span class="teal-text text-lighten-3">Password</span></label>
+              </div>
               <button id="login" class="btn waves-effect waves-light col s12" type="submit" name="action">Sign-In
-								<i class="material-icons right">send</i>
-							</button>
-						</div>
+                <i class="material-icons right">send</i>
+              </button>
             </form>
-				</div>
+          </div>
         </div>
         <div class="row">
           <div class="col s4  offset-s8">
-					<a href="#">
-						<button class="btn waves-effect waves-light col s12">Connect With Facebook
-							<i class="material-icons right">send</i>
-						</button>
-					</a>
-				  </div>
+            <a href="#">
+              <button class="btn waves-effect waves-light col s12">Connect With Facebook
+                <i class="material-icons right">send</i>
+              </button>
+            </a>
+          </div>
         </div>
         <div class="row">
           <div class="col s4  offset-s8">
-            <p>
-              <a href="/register" class="teal-text text-accent-1">Sign - Up</a>
-            </p>
-				  </div>
+            <p><a href="/register" class="teal-text text-lighten-3">Sign - Up</a></p>
+          </div>
         </div>
-			</div>
-			<div class="row  hide-on-large-only">
-       <div class="row">
-  			<div class="col s6  offset-s6">
-            <form class="col s12" method="post" action="/login">
-  					<div class="row">
-  						<div class="input-field col s12">
-  							<input name="username" type="text" class="validate">
-  							<label for="username"><span class="teal-text text-accent-1">Username</span></label>
-  						</div>
-              <div class="input-field col s12">
-  							<input name="password" type="password" class="validate">
-  							<label for="password"><span class="teal-text text-accent-1">Password</span></label>
-  						</div>
-              <button class="btn waves-effect waves-light col s12" type="submit" name="action">Sign-In
-  							<i class="material-icons right">send</i>
-  						</button>
-  					</div>
-            </form>
-  			</div>
-        </div>
-        <div class="row">
-          <div class="col s6  offset-s6">
-  				<a href="#">
-  					<button class="btn waves-effect waves-light col s12">Connect With Facebook
-  						<i class="material-icons right">send</i>
-  					</button>
-  				</a>
-  			  </div>
-        </div>
-        <div class="row">
-          <div class="col s6  offset-s6">
-            <p>
-              <a href="/register" class="teal-text text-accent-1">Sign - Up</a>
-            </p>
-  			  </div>
-        </div>
-        </div>
-			</div>
       </div>
-      <div class="parallax"><img src="/images/background.jpg" alt="Unsplashed background img 1" class="responsive-img"></div>
+      <div class="row  hide-on-large-only">
+        {% set count = info | wordcount %}
+        {% if count > 0 %}
+        <div class="row">
+          <div class="col s6 offset-s6 card-panel red lighten-2">
+            <p class="grey-text text-lighten-4 center-align col s12">{{info}}</p>
+          </div>
+        </div>
+        {% endif %}
+        <div class="row">
+          <div class="col s6  offset-s6">
+            <form class="col s12" method="post" action="/login">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input name="username" type="text" class="validate">
+                  <label for="username"><span class="teal-text text-lighten-3">Username</span></label>
+                </div>
+                <div class="input-field col s12">
+                  <input name="password" type="password" class="validate">
+                  <label for="password"><span class="teal-text text-lighten-3">Password</span></label>
+                </div>
+                <button class="btn waves-effect waves-light col s12" type="submit" name="action">Sign-In
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6  offset-s6">
+            <a href="#">
+              <button class="btn waves-effect waves-light col s12">Connect With Facebook
+                <i class="material-icons right">send</i>
+              </button>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6  offset-s6">
+            <p><a href="/register" class="teal-text text-lighten-3">Sign - Up</a></p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="parallax">
+    <img src="/images/background.jpg" alt="Unsplashed background img 1" class="responsive-img">
+  </div>
+</div>
 
 {% endblock %}
 

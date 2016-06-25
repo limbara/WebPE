@@ -11,10 +11,10 @@
 <br><br>
 	<div class="container">
 		<div class="row">
-			{% set count = message | wordcount %}
+			{% set count = info | wordcount %}
 			{% if count > 0 %}
 			<div class="col s12 card-panel red darken-2">
-				<p class="grey-text text-lighten-4 center">{{message}}</p>
+				<p class="grey-text text-lighten-4 center">{{info}}</p>
         	</div>
 			{% endif %}
 			<form class="col s12" method="post" action="/createUser"  enctype="application/x-www-form-urlencoded">
