@@ -12,8 +12,8 @@ middleware = function(app){
 	app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 	app.use(logger('dev'));
 	app.use(cookieParser())
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: false }));
+	app.use(bodyParser.json({limit : 1024 * 1024 * 10}));
+	app.use(bodyParser.urlencoded({ extended: false,limit : 1024 * 1024 * 10}));
 	app.use(express.static(path.join(__dirname, 'public')));
 	router.userrouter(app);
 	
