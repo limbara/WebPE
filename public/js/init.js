@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
   $('.button-collapse').sideNav();
   $('.dropdown-button').dropdown({
@@ -9,5 +10,7 @@ $(document).ready(function(){
    belowOrigin: true 
   });
   $('.parallax').parallax();
+  $('.materialboxed').materialbox();
+  $('.tooltipped').tooltip({delay: 50})
   $('.modal-trigger').leanModal();
 });
