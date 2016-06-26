@@ -28,7 +28,7 @@ userrouter = function(app){
 	
 	//POST
 	user.post('/login',frontPage.login);
-	user.post('/createUser',registerPage.checkUSER,registerPage.saveUser);
+	user.post('/createUser',registerPage.checkFormat,registerPage.checkUSER,registerPage.saveUser);
 	user.post('/Collection/:username/upload',Auth.validate,collectionPage.uploadphoto);
 	
 	app.use(user);

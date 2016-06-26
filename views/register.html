@@ -20,24 +20,50 @@
 			<form class="col s12" method="post" action="/createUser"  enctype="application/x-www-form-urlencoded">
 				<div class="col s8 offset-s2">
 					<div class="input-field col s12">
-					  <input id="nama" name="nama" type="text" class="validate" maxlength="30" onkeypress="lettersOnly(event)" required >
-					  <label for="nama">Nama</label>
+					  <input name="nama" type="text" class="validate tooltipped" maxlength="25" onkeypress="" required data-position="bottom" data-delay="50" 
+						  data-tooltip="Username must start with Uppercase & Lowercase letter, Cannot contains symbols, Min 6 characters & Max 25 characters" >
+					  <label for="nama">Username</label>
 					</div>
 				</div>
+				{% set username = usn %}
+				{% if username == 0 %}
+				<div class="col s2 card-panel red darken-2">
+					<p class="grey-text text-lighten-4 center">Wrong username format</p>
+	        	</div>
+				{% endif %}
+				<div class="col s8 offset-s2">
+					<div class="input-field col s12">
+					  <input name="password" type="password" class="validate tooltipped" maxlength="40" required data-position="bottom" data-delay="50" 
+						  data-tooltip="Password should contains at least 1 digit, Min 8 characters & Max 40 characters" >
+					  <label for="password">Password</label>
+					</div>
+				</div>
+				{% set password = pwd%}
+				{% if password == 0 %}
+				<div class="col s2 card-panel red darken-2">
+					<p class="grey-text text-lighten-4 center">Wrong password format</p>
+	        	</div>
+				{% endif %}
+				<div class="col s8 offset-s2">
+					<div class="input-field col s12">
+					  <input name="repassword" type="password" class="validate" maxlength="40" required>
+					  <label for="password">Re-type Password</label>
+					</div>
+				</div>
+				{% set same = sm %}
+				{% if same == 0 %}
+				<div class="col s2 card-panel red darken-2">
+					<p class="grey-text text-lighten-4 center">Password not Match</p>
+	        	</div>
+				{% endif %}
 				<div class="col s8 offset-s2">
 					<div class="input-field col s12">
 					  <input name="email" type="email" class="validate" maxlength="50" required>
 					  <label for="email">Email</label>
 					</div>
-				</div>
-				<div class="col s8 offset-s2">
-					<div class="input-field col s12">
-					  <input name="password" type="password" class="validate" maxlength="40" required>
-					  <label for="password">Password</label>
-					</div>
-				</div>
+				</div>	
 				<div class="col s8 offset-s2">				
-				  <button class="btn waves-effect waves-light col s6" type="submit" name="action">Submit
+				  <button id="submit" class="btn waves-effect waves-light col s6" type="submit" name="action">Submit
 				    <i class="material-icons right">send</i>
 				  </button>
 				  <button class="red btn waves-effect waves-light col s6" type="reset" name="action">Reset
@@ -59,5 +85,5 @@
 	<script src="/js/jquery.js"></script>
 	<script src="/js/materialize.js"></script>
 	<script src="/js/init.js"></script>
-	
+
 {% endblock %}

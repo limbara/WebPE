@@ -3,10 +3,14 @@ var registerPage,
     COLLECTION = require('../utils/COLLECTION');
 var path = require('path');
 var fs = require('fs');
+var CONSTANT = require('../constant');
 
 var page = function(req,res){
     var info = req.query.info;
-    res.render('register.html',{info : info});
+    var usn = req.query.usn;
+    var pwd = req.query.pwd;
+    var sm = req.query.sm;
+    res.render('register.html',{info:info, usn:usn, pwd:pwd, sm:sm});
 }
 
 var saveUSER = function(req,res,next){
@@ -53,10 +57,30 @@ var checkUSER = function(req,res,next){
     })
 }
 
+var checkFormat = function(req,res,next){
+    var usn=1,pwd=1,sm=1;
+    if(CONSTANT.REGEX_USERNAME.test(req.body.nama)==false){
+        usn =0;
+    }
+    if(CONSTANT.REGEX_PASSWORD.test(req.body.repassword)==false){
+        pwd =0;
+    }
+    if(req.body.password != req.body.repassword){
+        sm =0;
+    }
+    if(usn==0||pwd==0||sm==0){
+        res.redirect('/register?usn='+usn+'&pwd='+pwd+'&sm='+sm);
+    }
+    else{
+        next();
+    }
+}
+
 registerPage = {
     page : page,
     saveUser : saveUSER,
-    checkUSER : checkUSER
+    checkUSER : checkUSER,
+    checkFormat : checkFormat
 }
 
 module.exports = registerPage;
