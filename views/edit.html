@@ -22,52 +22,149 @@
 						</div>
 						<div class="collapsible-body">
 							<div class="col s12 white" >
-								<div class="col s6">
-									<div class="range-field">
-										<label for="brightness">Brightness</label>
-										<input id="brightness" type="range" min="-100" max="100" >
+								<div class="row">
+									<div class="col l6 m6 s12">
+										<div class="range-field">
+											<label for="brightness">Brightness</label>
+											<input id="brightness" type="range" min="-100" max="100" >
+										</div>
+										<div class="range-field">
+											<label for="vibrance">Vibrance</label>
+											<input id="vibrance" type="range" min="-100" max="100">
+										</div>
+										<div class="range-field">
+											<label for="hue">Hue</label>
+											<input id="hue" type="range" min="0" max="100">
+										</div>
+										<div class="range-field">
+											<label for="clip">Clip</label>
+											<input id="clip" type="range" min="0" max="100">
+										</div>
+										<div class="range-field">
+											<label for="Stactblur">StactBlur</label>
+											<input id="stactblur" type="range" min="0" max="100">
+										</div>
+										<div class="range-field">
+											<label for="contrast">Contrast</label>
+											<input id="contrast" type="range" min="0" max="10">	
+										</div>
 									</div>
-									<div class="range-field">
-										<label for="vibrance">Vibrance</label>
-										<input id="vibrance" type="range" min="-100" max="100">
-									</div>
-									<div class="range-field">
-										<label for="hue">Hue</label>
-										<input id="hue" type="range" min="-100" max="100">
-									</div>
-									<div class="range-field">
-										<label for="clip">Clip</label>
-										<input id="clip" type="range" min="0" max="100">
-									</div>
-									<div class="range-field">
-										<label for="Stactblur">StactBlur</label>
-										<input id="stactblur" type="range" min="0" max="100">
-									</div>
-									<div class="range-field">
-										<label for="contrast">Contrast</label>
-										<input id="contrast" type="range" min="-100" max="100">	
+									<div class="col l6 m6 s12">
+										<div class="range-field">
+											<label for="saturation">Saturation</label>
+											<input id="saturation" type="range" min="-100" max="100">
+										</div>
+										<div class="range-field">
+											<label for="exposure">Exposure</label>
+											<input id="exposure" type="range" min="-100" max="100">
+										</div>
+										<div class="range-field">
+											<label for="sepia">Sepia</label>
+											<input id="sepia" type="range" min="0" max="100">
+										</div>
+										<div class="range-field">
+											<label for="noise">Noise</label>
+											<input id="noise" type="range" min="0" max="100">
+										</div>
+										<div class="range-field">
+											<label for="sharpen">Sharpen</label>
+											<input id="sharpen" type="range" min="0" max="100">
+										</div>
+										<div class="range-field">
+											<label for="gamma">Gamma</label>
+											<input id="gamma" type="range" step="0.2" min="0" max="5">
+										</div>
+										
 									</div>
 								</div>
-								<div class="col s6">
-									<div class="range-field">
-										<label for="saturation">Saturation</label>
-										<input id="saturation" type="range" min="-100" max="100">
+								<div class="row">
+									<div class="col s12">
+										<div class="range-field">
+											<label for="red"><span class="red-text">Red</span></label>
+											<input id="red" type="range" min="-100" max="100">
+										</div>
+										<div class="range-field">
+											<label for="blue"><span class="blue-text">Blue</span></label>
+											<input id="blue" type="range" min="-100" max="100">
+										</div>
+										<div class="range-field">
+											<label for="green"><span class="green-text">Green</span></label>
+											<input id="green" type="range" min="-100" max="100">
+										</div>
 									</div>
-									<div class="range-field">
-										<label for="exposure">Exposure</label>
-										<input id="exposure" type="range" min="-100" max="100">
+								</div>
+								
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="collapsible-header  blue">
+							 <i class="mdi-editor-format-paint right"></i>Instance Effects
+						</div>
+						<div class="collapsible-body">
+							<div class="col s12 white" >
+							  	<div class="col l3 m4 s6">
+									<div class="card">
+										<div class="card-image" id="filter_original">
+											<img src="/images/{{user.username}}/{{filename}}">
+											<span >Original</span>
+										</div>
 									</div>
-									<div class="range-field">
-										<label for="sepia">Sepia</label>
-										<input id="sepia" type="range" min="0" max="100">
+								</div>
+								<div class="col l3 m4 s6">
+									<div class="card">
+										<div class="card-image" id="filter_greyscale">
+											<img src="/images/{{user.username}}/{{filename}}">
+											<span >Greyscale</span>
+										</div>
 									</div>
-									<div class="range-field">
-										<label for="noise">Noise</label>
-										<input id="noise" type="range" min="0" max="100">
+								</div>
+								<div class="col l3 m4 s6">
+									<div class="card">
+										<div class="card-image" id="filter_sepia">
+											<img src="/images/{{user.username}}/{{filename}}">
+											<span >Sepia</span>
+										</div>
 									</div>
-									<div class="range-field">
-										<label for="sharpen">Sharpen</label>
-										<input id="sharpen" type="range" min="0" max="100">
+								</div>
+								<div class="col l3 m4 s6">
+									<div class="card">
+										<div class="card-image" id="filter_vintage">
+											<img src="/images/{{user.username}}/{{filename}}">
+											<span >Vintage</span>
+										</div>
+									</div>
+								</div>
+								<div class="col l3 m4 s6">
+									<div class="card">
+										<div class="card-image" id="filter_colder">
+											<img src="/images/{{user.username}}/{{filename}}">
+											<span >Colder</span>
+										</div>
+									</div>
+								</div>
+								<div class="col l3 m4 s6">
+									<div class="card">
+										<div class="card-image" id="filter_sharp">
+											<img src="/images/{{user.username}}/{{filename}}">
+											<span >Sharp</span>
+										</div>
+									</div>
+								</div>
+								<div class="col l3 m4 s6">
+									<div class="card">
+										<div class="card-image" id="filter_negative">
+											<img src="/images/{{user.username}}/{{filename}}">
+											<span >Negative</span>
+										</div>
+									</div>
+								</div>
+								<div class="col l3 m4 s6">
+									<div class="card">
+										<div class="card-image" id="filter_matte">
+											<img src="/images/{{user.username}}/{{filename}}">
+											<span >Matte</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -85,6 +182,7 @@
 		</div>
 	</div>
 <br><br>
+
 
 {% endblock %}
 
