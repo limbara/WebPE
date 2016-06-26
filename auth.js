@@ -1,7 +1,8 @@
 var jwt    = require('jsonwebtoken');
+var CONSTANT = require('./constant');
 
 function generateToken(user){
-	var token = jwt.sign(user, 'SECRET' , {
+	var token = jwt.sign(user, CONSTANT.JWT_USER_STRING, {
           expiresIn: '1440m' // expires in 24 hours
         });
 	return token;
@@ -12,7 +13,7 @@ function validate(req, res, next){
 	// decode token
 	if (token) {
 		// verifies secret and checks exp
-		jwt.verify(token,'SECRET' , function(err, decoded) {      
+		jwt.verify(token,CONSTANT.JWT_USER_STRING , function(err, decoded) {      
 		  	if (err) {
 				return res.redirect('/error?message=Failed to authenticate token&status=500&error='+err); 
 		  	} 
