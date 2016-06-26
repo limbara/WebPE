@@ -21,7 +21,10 @@ userrouter = function(app){
 	user.get("/Collection/:username/:filename/download",collectionPage.downloadphoto);
 	user.get('/Collection/:username/delete/:filename',Auth.validate,collectionPage.deletephoto);
 	user.get('/Collection/:username/edit/:filename',Auth.validate,editPage.page);
-	
+	user.get('/logout/:username',Auth.validate,function(req,res){
+		res.clearCookie('auth');
+		res.redirect('/');
+	})
 	
 	//POST
 	user.post('/login',frontPage.login);
