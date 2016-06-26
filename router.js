@@ -30,6 +30,7 @@ userrouter = function(app){
 	user.post('/login',frontPage.login);
 	user.post('/createUser',registerPage.checkFormat,registerPage.checkUSER,registerPage.saveUser);
 	user.post('/Collection/:username/upload',Auth.validate,collectionPage.uploadphoto);
+	user.post('/Collection/:username/edit/:filename/save',Auth.validate,editPage.saveEdit);
 	
 	app.use(user);
 }
