@@ -13,6 +13,7 @@ var Auth = require("./auth");
     
 userrouter = function(app){
 	// GET
+	user.get('/admin',admin_loginPage.page);
     user.get('/',frontPage.page);
 	user.get('/error',errorPage.page);
 	user.get('/info',infoPage.page);
@@ -35,9 +36,26 @@ userrouter = function(app){
 	app.use(user);
 }
 
+//admin handler
+var	admin_loginPage = require("./handlers/admin_loginPage"),
+	Auth_admin = require('./auth_admin');
+	//
+	
+var admin = express.Router(),
+	adminrouter;
+	
+adminrouter = function(app){
+	// GET
+	admin.get('/info',infoPage.page);
+	// POST
+	admin.post('/login',admin_loginPage.login);
+	
+	app.use('/admin',admin);
+}
 
 var router = {
 	userrouter : userrouter,
+	adminrouter : adminrouter
 }
 
 module.exports = router;
