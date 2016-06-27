@@ -12,8 +12,12 @@ var findUSER = function(username){
 	return knex('user').select('id_user','username','password','email').where('username',username);
 };
 
+var fetchAllUSER = function(){
+	return knex.select().table('user');
+}
 
 module.exports = {
 	saveUSER: saveUSER,
-    findUSER:findUSER
+	findUSER:findUSER,
+	fetchAllUser : fetchAllUSER
 };
