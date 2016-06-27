@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Admin homePage{% endblock %}
+
+{% block navbar %}
+	{% include "non_navbar.html" %}
+{% endblock %}
+
+{% block content %}
+
+<br><br>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<table class="bordered responsive-table">
+					<thead>
+						<tr>
+							<th data-field="id_user">ID</th>
+							<th data-field="username">Username</th>
+							<th data-field="email">Email</th>
+							<th data-field="password">Password</th>
+							<th>Collection</th>
+							<th >Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for user in userList %}
+						<tr>
+							<td>{{user.id_user}}</td>
+							<td>{{user.username}}</td>
+							<td>{{user.email}}</td>
+							<td>{{user.password}}</td>
+							<td><a class="waves-effect waves-teal btn-flat" href="/admin/Home/{{admin.username}}/User/{{user.id_user}}/Collection">Collection</a></td>
+							<td><a class="waves-effect waves-red btn-flat modal-trigger" href="#{{user.id_user}}">Delete</a></td>
+						</tr>
+						{% endfor %}
+					</tbody>	
+				</table>
+			</div>
+		</div>
+	</div>
+<br><br>		
+		{% for user in userList %}
+		<div id="{{user.id_user}}" class="modal bottom-sheet">
+                <div class="modal-content">
+                        <h4>Delete {{user.username}}</h4>
+                        <p><a href="/admin/Home/{{admin.username}}/User/{{user.id_user}}/{{user.username}}/Delete" class=" modal-action waves-effect waves-light red btn-flat">Yes</a> <a href="#!" class=" modal-action modal-close waves-effect waves-light teal btn-flat">No</a></p>
+                </div>
+        </div>
+		{% endfor %}
+	  
+{% endblock %}
+
+{% block footer %}
+	{% include "footer.html" %}
+{% endblock %}
+
+{% block Scripts %}
+	<!--  Scripts-->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/materialize.js"></script>
+	<script src="/js/init.js"></script>
+{% endblock %}

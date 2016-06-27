@@ -37,7 +37,8 @@ userrouter = function(app){
 }
 
 //admin handler
-var	admin_loginPage = require("./handlers/admin_loginPage"),
+var admin_homePage = require('./handlers/admin/admin_homePage'),
+	admin_loginPage = require("./handlers/admin_loginPage"),
 	Auth_admin = require('./auth_admin');
 	//
 	
@@ -47,6 +48,8 @@ var admin = express.Router(),
 adminrouter = function(app){
 	// GET
 	admin.get('/info',infoPage.page);
+	admin.get('/Home/:username',Auth_admin.validate,admin_homePage.page);
+	
 	// POST
 	admin.post('/login',admin_loginPage.login);
 	
