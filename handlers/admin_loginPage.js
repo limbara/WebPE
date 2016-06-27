@@ -27,8 +27,7 @@ login = function(req,res){
                 var token = Auth_admin.generateToken(admin);
 
                 res.cookie('auth_admin',token);
-                // res.redirect('/admin/Home/'+admin.username);
-                res.json(admin.username);
+                res.redirect('/admin/Home/'+admin.username);
             } 
         }  
     });
