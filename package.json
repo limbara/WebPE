@@ -8,13 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "-"
+    "url": "https://github.com/sm4rtm3n/WebPE.git"
   },
   "keywords": [
-    "-"
+    "node",
+    "heroku",
+    "Webpe",
+    "edit photo",
+    "effect",
+    "express"
   ],
+  
   "author": "Macho",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.1",
     "serve-favicon": "~2.3.0",
