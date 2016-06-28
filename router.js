@@ -4,6 +4,7 @@ var express = require('express'),
 	frontPage = require("./handlers/frontPage"),
 	collectionPage = require("./handlers/collectionPage"),
 	editPage = require("./handlers/editPage"),
+	cameraPage  =require("./handlers/cameraPage"),
 	errorPage = require("./handlers/errorPage"),
 	infoPage = require("./handlers/infoPage"),
 	registerPage = require("./handlers/registerPage");
@@ -21,6 +22,7 @@ userrouter = function(app){
 	user.get('/Collection/:username',Auth.validate,collectionPage.page);
 	user.get("/Collection/:username/:filename/download",collectionPage.downloadphoto);
 	user.get('/Collection/:username/delete/:filename',Auth.validate,collectionPage.deletephoto);
+	user.get('/Collection/:username/camera',Auth.validate,cameraPage.page);
 	user.get('/Collection/:username/edit/:filename',Auth.validate,editPage.page);
 	user.get('/logout/:username',Auth.validate,function(req,res){
 		res.clearCookie('auth');
@@ -32,6 +34,7 @@ userrouter = function(app){
 	user.post('/createUser',registerPage.checkFormat,registerPage.checkUSER,registerPage.saveUser);
 	user.post('/Collection/:username/upload',Auth.validate,collectionPage.uploadphoto);
 	user.post('/Collection/:username/edit/:filename/save',Auth.validate,editPage.saveEdit);
+	user.post('/Collection/:username/camera/save',Auth.validate,cameraPage.savePhoto);
 	
 	app.use(user);
 }

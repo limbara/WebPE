@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Camera{% endblock %}
+
+{% block navbar %}{% include "navbar.html" %}{% endblock %}
+
+
+{% block content %}
+<br><br>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<div id="my_camera"></div>
+				<img id="camera_icon" class="responsive-img" src="/images/logo/camera_icon.png">
+			</div>
+			</div>
+			
+			<div class="col s12">
+				<div class="row">
+					<button class="btn waves-effect waves-light col s12" id="Capture" >Capture </button> 
+					<form class="col s12" method="post" action="/Collection/{{user.username}}/camera/save" >
+		 			  	<input name="base" type="text" id="base" class="hide" />
+		                <button class="btn waves-effect waves-light col s12" id="Save" type="submit">Save</button>
+    				</form>
+					
+				</div>
+				<div class="row">
+					<button class="btn red waves-effect waves-light col s12" id="Re_Capture">Re-Capture </button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block footer %}
+	{% include "footer.html" %}
+{% endblock %}
+
+{% block Scripts %}
+	<!--  Scripts-->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/materialize.js"></script>
+	<script src="/js/init.js"></script>
+	<script src="/js/caman.full.min.js"></script>
+	<script src="/js/webcam.js"></script>
+<script>
+		$('#Save').hide();
+		try{
+		Webcam.set({
+			width : $('#camera_icon').width(),
+			height : $('#camera_icon').height(),
+			image_format: 'jpeg',
+			jpeg_quality: 90
+		});
+		$("#camera_icon").hide();
+		Webcam.attach( '#my_camera' );
+		//ambil audio capture
+		var shutter = new Audio();
+		shutter.autoplay = false;
+		shutter.src = navigator.userAgent.match(/Firefox/) ? '../../sound/shutter.ogg' : '../../sound/shutter.mp3';
+		}
+		catch(e){
+			console.log(e);
+		}
+	
+	
+	$('#Capture').click(function(){
+		shutter.play();
+		$('#Save').show();
+		$('#Capture').hide();
+		Webcam.freeze();
+	});
+	
+	// take another shot
+	$('#Re_Capture').click(function(){
+		$('#Save').hide();
+		$('#Capture').show();
+		Webcam.unfreeze();
+		
+	});
+	
+	$('#Save').click(function(){
+		Webcam.snap( function(data_uri) {
+			document.getElementById('base').value = data_uri;
+		})
+		// Caman('#my_camera', function () {
+		// 	this.save(function(){
+		// 		var base64 = this.toBase64();
+		// 		document.getElementById('base').value = base64;
+		// 	  })
+		// })
+	})
+</script>
+	
+{% endblock %}
