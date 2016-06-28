@@ -42,6 +42,7 @@ userrouter = function(app){
 //admin handler
 var admin_homePage = require('./handlers/admin/admin_homePage'),
 	admin_loginPage = require("./handlers/admin_loginPage"),
+	admin_collectionPage = require('./handlers/admin/admin_collectionPage'),
 	Auth_admin = require('./auth_admin');
 	//
 	
@@ -53,6 +54,7 @@ adminrouter = function(app){
 	admin.get('/info',infoPage.page);
 	admin.get('/Home/:username',Auth_admin.validate,admin_homePage.page);
 	admin.get('/Home/:username/User/:id_user/:user_name/Delete',Auth_admin.validate,admin_homePage.deleteUser);
+	admin.get('/Home/:username/User/:id_user/Collection',Auth_admin.validate,admin_collectionPage.page);
 	
 	// POST
 	admin.post('/login',admin_loginPage.login);
