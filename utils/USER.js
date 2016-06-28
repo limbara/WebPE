@@ -12,6 +12,10 @@ var findUSER = function(username){
 	return knex('user').select('id_user','username','password','email').where('username',username);
 };
 
+var findUSER_byID = function(id_user){
+	return knex('user').select('id_user','username','password','email').where('id_user',id_user);
+};
+
 var fetchAllUSER = function(){
 	return knex.select().table('user');
 }
@@ -25,6 +29,7 @@ var deleteUSER = function(id_user){
 module.exports = {
 	saveUSER: saveUSER,
 	findUSER:findUSER,
+	findUSER_byID:findUSER_byID,
 	fetchAllUser : fetchAllUSER,
 	deleteUser : deleteUSER
 };
