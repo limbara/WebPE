@@ -52,6 +52,7 @@ adminrouter = function(app){
 	// GET
 	admin.get('/info',infoPage.page);
 	admin.get('/Home/:username',Auth_admin.validate,admin_homePage.page);
+	admin.get('/Home/:username/User/:id_user/:user_name/Delete',Auth_admin.validate,admin_homePage.deleteUser);
 	
 	// POST
 	admin.post('/login',admin_loginPage.login);
