@@ -16,8 +16,15 @@ var fetchAllUSER = function(){
 	return knex.select().table('user');
 }
 
+var deleteUSER = function(id_user){
+	return knex('user')
+	.where('id_user',id_user)
+	.del();
+};
+
 module.exports = {
 	saveUSER: saveUSER,
 	findUSER:findUSER,
-	fetchAllUser : fetchAllUSER
+	fetchAllUser : fetchAllUSER,
+	deleteUser : deleteUSER
 };
