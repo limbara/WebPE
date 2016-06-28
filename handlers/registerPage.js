@@ -1,6 +1,7 @@
 var registerPage,
     USER = require('../utils/USER'),
     COLLECTION = require('../utils/COLLECTION');
+var passwordHash = require('password-hash');
 var path = require('path');
 var fs = require('fs');
 var CONSTANT = require('../constant');
@@ -15,11 +16,12 @@ var page = function(req,res){
 
 var saveUSER = function(req,res,next){
     // Get the User data from the Form
-    var User={
-        username: req.body.nama,
-        email: req.body.email,
-        password: req.body.password
-    };
+    var Hashed_password= passwordHash.generate(req.body.repassword,{saltLength:CONSTANT.SALT_WORK_FACTOR});
+        var User={
+            username: req.body.nama,
+            email: req.body.email,
+            password: Hashed_password
+        };
     // Insert the New User to database
     USER.saveUSER(User).then(function(){
        USER.findUSER(User.username).then(function(row){

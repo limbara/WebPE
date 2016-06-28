@@ -4,6 +4,8 @@ var frontPage,
     USER = require('../utils/USER'),
     Auth = require("../auth");
     
+var passwordHash = require('password-hash');
+    
     
 page = function(req,res){
     var info = req.query.info;
@@ -19,16 +21,16 @@ login = function(req,res){
         } 
         else if (user) {
             // check if password matches
-            if (user.password != req.body.password) {
-                res.redirect("/?info=Authentication failed. Wrong password.");
-            }
-            else {
+             // check if password matches
+            if(passwordHash.verify(req.body.password,user.password) == true){
                 // if user is found and password is right
                 // create a token
                 var token = Auth.generateToken(user)
                 res.cookie('auth',token);
                 res.redirect('/Collection/'+user.username);
-            } 
+            }
+            // if password not match
+            res.redirect("/?info=Authentication failed. Wrong password.");
         }  
     });
 }
