@@ -1,5 +1,6 @@
 module.exports = {
 	SERVER_PORT : 3000,
+	SALT_WORK_FACTOR : 10,
 	JWT_USER_STRING : "UserSecret",
 	JWT_ADMIN_STRING : "AdminSecret",
 	// Username must start with Uppercase & Lowercase letter , Cannot contains symbols, Min 6 characters & Max 25 characters
