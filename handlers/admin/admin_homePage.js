@@ -19,13 +19,13 @@ var deleteUser = function(req,res){
     var userpath = path.join(__dirname, '../../public/images/'+username);
     Collection.fetchCOLLECTION(id_user).then(function(collection){
         var col= JSON.parse(collection[0].photos);
-        
-        for(var i =0 ;i<col.length;i++){
-            fs.unlinkSync(userpath+'/'+col[i].filename);
-            console.log("deleted "+col[i].filename);
+        if(col.length > 0){
+            for(var i =0 ;i<col.length;i++){
+                fs.unlinkSync(userpath+'/'+col[i].filename);
+                console.log("deleted "+col[i].filename);
+            }
         }
-       
-        
+
         Collection.deleteCOLLECTION(id_user).then(function(){
             //delete the directory named 'username'
             fs.rmdir(userpath,function(err){
