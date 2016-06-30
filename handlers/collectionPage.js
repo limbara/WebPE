@@ -1,6 +1,8 @@
 var collectionPage,
     page,
-    Collection = require('../utils/COLLECTION');
+    Collection = require('../utils/COLLECTION'),
+    CONSTANT = require('../constant');
+  
     
 var fs = require('fs');
 var path = require('path');
@@ -46,32 +48,42 @@ var uploadphoto = function(req,res){
             file_ext = files.file.name.split(/[. ]+/).pop(),
             
             file_name = uid(22);
-          
-            var targetPath = path.join(__dirname, '../public/images/'+user.username+'/'+file_name+'.'+file_ext);
-            
-            fs.readFile(old_path, function(err, data) {
-                fs.writeFile(targetPath, data, function(err) {
-                    fs.unlink(old_path, function(err) {
-                        if (err) {
-                            res.redirect('/error?message=something went wrong&status='+500+'&error='+err);
-                        } else {
-                            
-                            Collection.fetchCOLLECTION(user.id_user).then(function(collection){
-                                var col= JSON.parse(collection[0].photos);
-                                var uploaded_photo = {
-                                    filename : file_name+"."+file_ext
-                                }
-                                col.push(uploaded_photo);
-                                Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
-                                    res.redirect('/info?i=Upload berhasil&b=/Collection/'+user.username);
+            //check uploaded file size
+            if(check_size(file_size,CONSTANT.IMAGE_MAX_UPLOAD) == false){
+                res.redirect('/info?i= File upload tidak boleh melebihi 1MB &b=/Collection/'+user.username);
+            }
+            //check uploaded file type
+            if(check_type(CONSTANT.IMAGE_TYPES,file_ext)== false){
+                res.redirect('/info?i= Tipe file upload hanya jpeg, jpg, dan png &b=/Collection/'+user.username);
+            }
+            //if both check_size & check_type pass
+            if(check_size(file_size,CONSTANT.IMAGE_MAX_UPLOAD) == true && check_type(CONSTANT.IMAGE_TYPES,file_ext) == true){ 
+                var targetPath = path.join(__dirname, '../public/images/'+user.username+'/'+file_name+'.'+file_ext);
+                
+                fs.readFile(old_path, function(err, data) {
+                    fs.writeFile(targetPath, data, function(err) {
+                        fs.unlink(old_path, function(err) {
+                            if (err) {
+                                res.redirect('/error?message=something went wrong&status='+500+'&error='+err);
+                            } else {
+                                
+                                Collection.fetchCOLLECTION(user.id_user).then(function(collection){
+                                    var col= JSON.parse(collection[0].photos);
+                                    var uploaded_photo = {
+                                        filename : file_name+"."+file_ext
+                                    }
+                                    col.push(uploaded_photo);
+                                    Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
+                                        res.redirect('/info?i=Upload berhasil&b=/Collection/'+user.username);
+                                    })
                                 })
-                            })
-                            
-        
-                        }
+                                
+            
+                            }
+                        });
                     });
-                });
-            }); 
+                }); 
+            }
     });
 }
 
@@ -91,7 +103,7 @@ collectionPage = {
 
 module.exports = collectionPage;
 
-var match_type = function(array,file_ext){
+var check_type = function(array,file_ext){
     for(var i =0 ;i < array.length ; i++){
         if(array[i] == file_ext){
             return true;
@@ -99,3 +111,10 @@ var match_type = function(array,file_ext){
     }
     return false;
 } 
+
+var check_size = function(image_size,max_upload){
+    if(image_size < max_upload){
+        return true;
+    }
+    return false;
+}

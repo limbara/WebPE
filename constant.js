@@ -1,6 +1,8 @@
 module.exports = {
 	SERVER_PORT : 3000,
 	SALT_WORK_FACTOR : 10,
+	IMAGE_MAX_UPLOAD : 1000000,
+	IMAGE_TYPES = ['jpeg', 'png','jpg'],
 	JWT_USER_STRING : "UserSecret",
 	JWT_ADMIN_STRING : "AdminSecret",
 	// Username must start with Uppercase & Lowercase letter , Cannot contains symbols, Min 6 characters & Max 25 characters
