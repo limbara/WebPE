@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Photo{% endblock %}
+
+{% block navbar %}
+	{% include "non_navbar.html" %}
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <img src="/images/Upload/{{username}}/{{filename}}" alt="{{filename}}" class="responsive-img">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+	{% include "footer.html" %}
+{% endblock %}
+
+{% block Scripts %}
+	<!--  Scripts-->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/materialize.js"></script>
+	<script src="/js/init.js"></script>
+{% endblock %}
