@@ -2,7 +2,8 @@ var frontPage,
     page,
     login,
     USER = require('../utils/USER'),
-    Auth = require("../auth");
+    Auth = require("../auth"),
+    CONSTANT = require("../constant");
     
 var passwordHash = require('password-hash');
     
@@ -22,7 +23,7 @@ login = function(req,res){
         else if (user) {
             // check if password matches
              // check if password matches
-            if(passwordHash.verify(req.body.password,user.password) == true){
+            if(passwordHash.verify(req.body.password,user.password,{saltLength:CONSTANT.SALT_WORK_FACTOR}) == true){
                 // if user is found and password is right
                 // create a token
                 var token = Auth.generateToken(user)

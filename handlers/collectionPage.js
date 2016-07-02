@@ -25,7 +25,7 @@ var deletephoto = function(req,res){
         for(var i=0;i< col.length ; i++){
             if(col[i].filename === photo){
                 col.splice(i,1);
-                fs.unlink(path.join(__dirname, '../public/images/'+user.username+'/'+photo))
+                fs.unlink(path.join(__dirname, '../public/images/Upload/'+user.username+'/'+photo))
                 break;
             }
         }
@@ -58,7 +58,7 @@ var uploadphoto = function(req,res){
             }
             //if both check_size & check_type pass
             if(check_size(file_size,CONSTANT.IMAGE_MAX_UPLOAD) == true && check_type(CONSTANT.IMAGE_TYPES,file_ext) == true){ 
-                var targetPath = path.join(__dirname, '../public/images/'+user.username+'/'+file_name+'.'+file_ext);
+                var targetPath = path.join(__dirname, '../public/images/Upload/'+user.username+'/'+file_name+'.'+file_ext);
                 
                 fs.readFile(old_path, function(err, data) {
                     fs.writeFile(targetPath, data, function(err) {

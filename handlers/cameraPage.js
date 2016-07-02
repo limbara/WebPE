@@ -16,7 +16,7 @@ var savePhoto = function(req,res){
     var base64 = req.body.base;
     var file_ext = 'jpg';
     var file_name = uid(22);
-    var target_path  = path.join(__dirname, '../public/images/'+user.username+'/'+file_name+'.'+file_ext);
+    var target_path  = path.join(__dirname, '../public/images/Upload/'+user.username+'/'+file_name+'.'+file_ext);
     var data = base64.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');
     fs.writeFile(target_path, buf,function(err){

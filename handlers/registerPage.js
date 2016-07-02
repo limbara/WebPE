@@ -28,7 +28,7 @@ var saveUSER = function(req,res,next){
            // Create First Collection Data
             var Collection ={
                 photos : JSON.stringify([]),
-                path : path.join(__dirname, '..','public/images/',(row[0].username).toString()),
+                path : path.join(__dirname, '..','public/images/Upload/',(row[0].username).toString()),
                 id_user : row[0].id_user
             }
             // Insert the New Collection to database

@@ -16,19 +16,19 @@ var deleteUser = function(req,res){
     var admin = req.admin_decoded;
     var id_user = req.params.id_user;
     var username = req.params.user_name;
-    var userpath = path.join(__dirname, '../../public/images/'+username);
     Collection.fetchCOLLECTION(id_user).then(function(collection){
+        var collectionPath = collection[0].path;
         var col= JSON.parse(collection[0].photos);
         if(col.length > 0){
             for(var i =0 ;i<col.length;i++){
-                fs.unlinkSync(userpath+'/'+col[i].filename);
+                fs.unlinkSync(collectionPath+'/'+col[i].filename);
                 console.log("deleted "+col[i].filename);
             }
         }
 
         Collection.deleteCOLLECTION(id_user).then(function(){
             //delete the directory named 'username'
-            fs.rmdir(userpath,function(err){
+            fs.rmdir(collectionPath,function(err){
                 if(err){
                     console.log(err);
                     res.redirect('/error?message=something went wrong&status=500&error='+err);

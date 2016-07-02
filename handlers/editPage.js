@@ -21,7 +21,7 @@ var saveEdit = function(req,res){
     var filename = req.params.filename;
     var file_ext = filename.split(/[. ]+/).pop();
     var file_name = uid(22);
-    var target_path  = path.join(__dirname, '../public/images/'+username+'/'+file_name+'.'+file_ext);
+    var target_path  = path.join(__dirname, '../public/images/Upload/'+username+'/'+file_name+'.'+file_ext);
     var data = base64.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');
     fs.writeFile(target_path, buf,function(err){
