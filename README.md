@@ -1,5 +1,5 @@
 # WebPE
-a Web app for editing photos 
+a Web app for adding photo effect 
 
 ## Requirements
 1. Install [Node.js](http://nodejs.org)
@@ -7,9 +7,14 @@ a Web app for editing photos
 3. Install the dependencies `$ npm install`
 
 ## Migrate database through knex command
+
+Before migration you can change the database configuration to match your database in model/knexfile.js.
+
+Read the [Knex.js](http://knexjs.org) documentation for the supported database.
+
 In the model folder do `$ knex migrate:latest --env production` (the `--env production` will use the database config production in knexfile.js ) 
 
 ## Running the server
-` $ npm start` OR `$ npm run dev` 
+` $ npm start` 
 
  
