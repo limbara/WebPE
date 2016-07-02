@@ -15,6 +15,8 @@ Read the [Knex.js](http://knexjs.org) documentation for the supported database.
 In the model folder do `$ knex migrate:latest --env production` (the `--env production` will use the database config production in knexfile.js ) 
 
 ## Running the server
-` $ npm start` 
+Before running the server create a folder named Upload in public/images/Upload
+
+Type the command ` $ npm start` to start server
 
  
