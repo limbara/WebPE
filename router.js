@@ -14,7 +14,7 @@ var express = require('express'),
 userrouter = function(app){
 	// GET
 	user.get('/admin',admin_loginPage.page);
-    user.get('/',Auth.validate,frontPage.page);
+    user.get('/',Auth.validatehome,frontPage.page);
 	user.get('/error',errorPage.page);
 	user.get('/info',infoPage.page);
 	user.get('/register',registerPage.page);

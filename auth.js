@@ -40,9 +40,30 @@ function validate(req, res, next){
 	}
 };
 
+
+function validatehome(req,res,next){
+	var token = req.cookies.auth;
+	// decode token
+	if (token) {
+		// verifies secret and checks exp
+		jwt.verify(token,CONSTANT.JWT_USER_STRING , function(err, decoded) {      
+		  	if (err) {
+				return res.redirect('/error?message=Failed to authenticate token&status=500&error='+err); 
+		  	} 
+			else {
+			 	res.redirect('/Collection/'+decoded.username);
+			}
+		});
+	}
+	else {
+		next();
+	}
+}
+
 var auth = {
 	validate: validate,
 	generateToken: generateToken,
+	validatehome : validatehome
 }
 
 module.exports = auth;
