@@ -50,7 +50,14 @@ var saveUSER = function(req,res,next){
 var checkUSER = function(req,res,next){
     USER.findUSER(req.body.nama).then(function(usernama){
         if(!usernama[0]){
-            next();    
+            USER.findUSER_byEmail(req.body.email).then(function(useremail){
+                if(!useremail[0]){
+                    next();         
+                }
+                else{
+                    res.redirect('/register?info=Email sudah pernah terdaftar !');
+                }
+            })
         }
         else{
             res.redirect('/register?info=Username telah terpakai !');
