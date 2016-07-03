@@ -8,6 +8,7 @@ var express = require('express'),
 	errorPage = require("./handlers/errorPage"),
 	infoPage = require("./handlers/infoPage"),
 	registerPage = require("./handlers/registerPage"),
+	forgotPasswordPage = require('./handlers/forgotPasswordPage'),
 	photoPage = require("./handlers/photoPage"),
 	Auth = require('./auth');
 
@@ -18,6 +19,7 @@ userrouter = function(app){
 	user.get('/error',errorPage.page);
 	user.get('/info',infoPage.page);
 	user.get('/register',registerPage.page);
+	user.get('/forgotPassword',forgotPasswordPage.page);
 	user.get('/Collection/:username',Auth.validate,collectionPage.page);
 	user.get('/Collection/:username/:filename',photoPage.page);
 	user.get("/Collection/:username/:filename/download",collectionPage.downloadphoto);
@@ -32,6 +34,7 @@ userrouter = function(app){
 	//POST
 	user.post('/login',frontPage.login);
 	user.post('/createUser',registerPage.checkFormat,registerPage.checkUSER,registerPage.saveUser);
+	user.post('/changePassword',forgotPasswordPage.checkFormat,forgotPasswordPage.changePassword);
 	user.post('/Collection/:username/upload',Auth.validate,collectionPage.uploadphoto);
 	user.post('/Collection/:username/edit/:filename/save',Auth.validate,editPage.saveEdit);
 	user.post('/Collection/:username/camera/save',Auth.validate,cameraPage.savePhoto);
