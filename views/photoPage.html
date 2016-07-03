@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
+{% block metadata %}
+        <meta property="og:url"                content=	"{{HOST_NAME}}/Collection/{{username}}/{{filename}}" />
+        <meta property="og:type"               content="website" />
+        <meta property="og:title"              content="Photo" />
+        <meta property="og:description"        content="Add effect to your photos with this simple website. This website is build from our first experience in web development." />
+        <meta property="og:image"              content="{{HOST_NAME}}/images/Upload/{{username}}/{{filename}}" />
+{% endblock %}
+
 {% block title %}Photo{% endblock %}
 
 {% block navbar %}

@@ -12,8 +12,9 @@ var formidable = require('formidable');
 page = function(req,res){
     var user = req.decoded;
     var info = req.query.info;
+    var HOST_NAME  = CONSTANT.HOST_NAME;
     Collection.fetchCOLLECTION(user.id_user).then(function(Collection){
-        res.render('collection.html',{user : user , collection : JSON.parse(Collection[0].photos) , path: Collection[0].path , info : info});
+        res.render('collection.html',{user : user , collection : JSON.parse(Collection[0].photos) , path: Collection[0].path , info : info , HOST_NAME : HOST_NAME});
     })
 }
 

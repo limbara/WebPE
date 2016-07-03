@@ -1,5 +1,6 @@
 module.exports = {
 	SERVER_PORT : 3000,
+	HOST_NAME : "http://webpe.herokuapp.com",
 	SALT_WORK_FACTOR : 10,
 	IMAGE_MAX_UPLOAD : 1000000,
 	IMAGE_TYPES : ['jpeg', 'png','jpg'],
