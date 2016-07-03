@@ -21,7 +21,7 @@ userrouter = function(app){
 	user.get('/register',registerPage.page);
 	user.get('/forgotPassword',forgotPasswordPage.page);
 	user.get('/Collection/:username',Auth.validate,collectionPage.page);
-	user.get('/Collection/:username/:filename',photoPage.page);
+	user.get('/Collection/:username/:filename/view',photoPage.page);
 	user.get("/Collection/:username/:filename/download",collectionPage.downloadphoto);
 	user.get('/Collection/:username/delete/:filename',Auth.validate,collectionPage.deletephoto);
 	user.get('/Collection/:username/camera',Auth.validate,cameraPage.page);
