@@ -48,7 +48,7 @@ function validatehome(req,res,next){
 		// verifies secret and checks exp
 		jwt.verify(token,CONSTANT.JWT_USER_STRING , function(err, decoded) {      
 		  	if (err) {
-				return res.redirect('/error?message=Failed to authenticate token&status=500&error='+err); 
+				next();
 		  	} 
 			else {
 			 	res.redirect('/Collection/'+decoded.username);
