@@ -2,12 +2,12 @@
 
 module.exports = {
   production: {
-    client: 'mysql',
+    client: '',
   connection: {
-    host     : '127.0.0.1',
-    user     : 'root',
-    password : 'nicolimbara',
-    database : 'test'
+    host     : '',
+    user     : '',
+    password : '',
+    database : ''
   },
     pool: {
       min: 2,
