@@ -32,7 +32,7 @@ var saveEdit = function(req,res){
                             var edited_photo = {
                                 filename : file_name+"."+file_ext
                             }
-                            col.push(edited_photo);
+                            col.unshift(edited_photo);
                             Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
                                 res.redirect('/info?i=Foto berhasil disimpan&b=/Collection/'+user.username);
                             })

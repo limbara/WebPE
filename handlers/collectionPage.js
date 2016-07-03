@@ -73,7 +73,7 @@ var uploadphoto = function(req,res){
                                     var uploaded_photo = {
                                         filename : file_name+"."+file_ext
                                     }
-                                    col.push(uploaded_photo);
+                                    col.unshift(uploaded_photo);
                                     Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
                                         res.redirect('/info?i=Upload berhasil&b=/Collection/'+user.username);
                                     })

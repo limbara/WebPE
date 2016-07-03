@@ -27,7 +27,7 @@ var savePhoto = function(req,res){
                             var camera_photo = {
                                 filename : file_name+"."+file_ext
                             }
-                            col.push(camera_photo);
+                            col.unshift(camera_photo);
                             Collection.updateCOLLECTION(JSON.stringify(col),collection[0].path,user.id_user,'id_user = ?',user.id_user).then(function(){
                                 res.redirect('/info?i=Foto berhasil disimpan&b=/Collection/'+user.username);
                             })
