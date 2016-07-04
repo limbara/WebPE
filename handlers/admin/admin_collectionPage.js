@@ -20,7 +20,7 @@ var page = function(req,res){
 var downloadphoto = function(req,res){
     var user_name = req.params.user_name;
 	var filename = req.params.filename;
-	var file = path.join(__dirname,'..','public','images','Upload',user_name,filename);
+	var file = path.join(__dirname,'..','..','public','images','Upload',user_name,filename);
 	res.download(file);
 }
 
