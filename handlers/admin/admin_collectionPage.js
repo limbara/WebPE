@@ -2,6 +2,7 @@ var admin_homePage,
     User = require('../../utils/USER'),
     Collection = require('../../utils/COLLECTION');
     
+var path = require('path');
     
 var page = function(req,res){
     var admin = req.admin_decoded;
@@ -16,8 +17,16 @@ var page = function(req,res){
 }
 
 
+var downloadphoto = function(req,res){
+    var user_name = req.params.user_name;
+	var filename = req.params.filename;
+	var file = path.join(__dirname,'..','public','images','Upload',user_name,filename);
+	res.download(file);
+}
+
 admin_homePage = {
     page : page,
+    downloadphoto : downloadphoto
 }
 
 module.exports = admin_homePage;

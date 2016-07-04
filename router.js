@@ -58,6 +58,7 @@ adminrouter = function(app){
 	admin.get('/Home/:username',Auth_admin.validate,admin_homePage.page);
 	admin.get('/Home/:username/User/:id_user/:user_name/Delete',Auth_admin.validate,admin_homePage.deleteUser);
 	admin.get('/Home/:username/User/:id_user/Collection',Auth_admin.validate,admin_collectionPage.page);
+	admin.get('/Home/:username/User/:user_name/Collection/:filename/download',Auth_admin.validate,admin_collectionPage.downloadphoto);
 	admin.get('/logout',function(req,res){
 		res.clearCookie('auth_admin');
 		res.redirect('/');
